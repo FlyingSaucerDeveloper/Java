@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-public class AddServlet_GET extends HttpServlet {
+public class AddServlet_GET_POST extends HttpServlet {
 	
 	
 	//overriding the service method of HttpServlet, in practice we use doGet and doPost method

@@ -15,7 +15,7 @@
 
 <servlet>
 <servlet-name>postAdder</servlet-name>
-<servlet-class>com.flyingsaucer.AddServlet_GET</servlet-class>
+<servlet-class>com.flyingsaucer.AddServlet_GET_POST</servlet-class>
 </servlet>   
 
 <servlet-mapping>
