@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-class forloop {
+class ForLoopPatterns {
 
     public static void main(String[] args) {
 
