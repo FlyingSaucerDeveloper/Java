@@ -132,7 +132,7 @@ public class AdvancedPatterns {
 
                 System.out.print("*");
             }
-            for (int k = 1; k <= i-1; k++) {
+            for (int k = 1; k <= i - 1; k++) {
 
                 System.out.print("*");
             }
@@ -154,7 +154,7 @@ public class AdvancedPatterns {
 
                 System.out.print("*");
             }
-            for (int k = 1; k <= i-1; k++) {
+            for (int k = 1; k <= i - 1; k++) {
 
                 System.out.print("*");
             }
