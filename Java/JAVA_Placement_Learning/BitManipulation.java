@@ -36,8 +36,8 @@ public class BitManipulation {
         System.out.println("New number after set bit operation on " + (i + 1) + " bit: " + newNum);
 
         // CLEAR BIT -> Change the BIT to 0
-        // Clear the xth bit of a number n. BIT MASK : 1<<i, Operation : AND with NOT 
-        //(~(BIT MASK) & n)
+        // Clear the xth bit of a number n. BIT MASK : 1<<i, Operation : AND with NOT
+        // (~(BIT MASK) & n)
 
         System.out.print("Enter the Bit to clear : ");
         i = sc.nextInt() - 1;
@@ -48,31 +48,29 @@ public class BitManipulation {
 
         System.out.println("The number after clearing the " + (i + 1) + " bit: " + newNum);
 
-        //UPDATE BIT
+        // UPDATE BIT
         // IF update the xth bit to 0 -> use clear bit operation (~BitMask & n)
-        // IF update the xth bit to 1 -> use Set bit operation   ( BitMask | n)  
+        // IF update the xth bit to 1 -> use Set bit operation ( BitMask | n)
 
-        //Update the xth bit of the number n.
+        // Update the xth bit of the number n.
 
         System.out.print("Enter the bit to update : ");
-        i = sc.nextInt()-1;
+        i = sc.nextInt() - 1;
 
-        bitMask = 1<<i;
+        bitMask = 1 << i;
 
-        System.out.print("To which bit you want to update (1 or 0): " );
+        System.out.print("To which bit you want to update (1 or 0): ");
         int bitType = sc.nextInt();
 
-        if (bitType==1){
+        if (bitType == 1) {
 
-            newNum = bitMask | n; //set bit operation
+            newNum = bitMask | n; // set bit operation
 
+        } else if (bitType == 0) {
+            newNum = (~bitMask) & n;
         }
-        else if(bitType ==0) {
-            newNum = (~bitMask)&n;
-        }
 
-        System.out.println("The number after updating the "+(i+1)+" bit with "+bitType+" is -> "+ newNum);
-
+        System.out.println("The number after updating the " + (i + 1) + " bit with " + bitType + " is -> " + newNum);
 
     }
 
