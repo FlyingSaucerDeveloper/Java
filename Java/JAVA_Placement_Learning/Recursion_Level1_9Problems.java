@@ -134,6 +134,24 @@ public class Recursion_Level1_9Problems {
 
     }
 
+    public static void subsequencePrinter(String string, int i, String ns) {
+
+        // Base case
+        if (i == string.length()) {
+            System.out.println(ns);
+            return;
+
+        }
+
+        char currChar = string.charAt(i);
+
+        // If char wants to be added to the sequence
+        subsequencePrinter(string, i + 1, ns + currChar);
+
+        // if not
+        subsequencePrinter(string, i + 1, ns);
+    }
+
     public static void main(String[] args) {
 
         // Tower of Hanoi
@@ -175,6 +193,12 @@ public class Recursion_Level1_9Problems {
         System.out.println("Remove the duplicates from the string : " + sO);
         String[] arr = new String[sO.length()];
         dupRemover(sO.toLowerCase(), 0, 1, "", arr);
+        System.out.println();
+
+        // Print all subsequences
+        String string = "abc";
+        System.out.println("Print all subsequences");
+        subsequencePrinter(string, 0, "");
         System.out.println();
 
     }
