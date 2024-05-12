@@ -201,8 +201,8 @@ public class Recursion_Level1_9Problems {
 
     }
 
-    // Code to seprate digits from a number 
-    //Helper method for the keypadCombinations method
+    // Code to seprate digits from a number
+    // Helper method for the keypadCombinations method
     public static TreeSet digitsFinder(int number, TreeSet s) {
 
         // Base case
