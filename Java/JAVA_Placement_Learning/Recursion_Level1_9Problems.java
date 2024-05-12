@@ -1,4 +1,10 @@
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class Recursion_Level1_9Problems {
 
@@ -138,6 +144,7 @@ public class Recursion_Level1_9Problems {
 
         // Base case
         if (i == string.length()) {
+
             System.out.println(ns);
             return;
 
@@ -152,6 +159,85 @@ public class Recursion_Level1_9Problems {
         subsequencePrinter(string, i + 1, ns);
     }
 
+    public static void uniqueSubsequencePrinter(String str, int i, String ns, HashSet<String> hSet) {
+
+        // Base Case
+        if (i == str.length()) {
+
+            if (hSet.contains(ns)) {
+                return;
+            } else {
+                System.out.println(ns);
+                hSet.add(ns);
+                return;
+            }
+
+        }
+
+        // if charAt(i) agrees
+        char currChar = str.charAt(i);
+        uniqueSubsequencePrinter(str, i + 1, ns + currChar, hSet);
+
+        // if charAt(i) not agrees
+        uniqueSubsequencePrinter(str, i + 1, ns, hSet);
+
+    }
+
+    public static void keypadCombinations(Object[] digitarr, Map keymap, String ns, int i) {
+        // Base case
+        if (i == digitarr.length) {
+            System.out.println(ns);
+            return;
+        }
+
+        int digit = (int) digitarr[i];
+        String mapping = keymap.get(digit).toString();
+
+        for (int x = 0; x < mapping.length(); x++) {
+
+            keypadCombinations(digitarr, keymap, ns + mapping.charAt(x), i + 1);
+
+        }
+
+    }
+
+    // Code to seprate digits from a number 
+    //Helper method for the keypadCombinations method
+    public static TreeSet digitsFinder(int number, TreeSet s) {
+
+        // Base case
+        if ((number / 10) < 1) {
+            TreeSet s1 = (TreeSet) s.descendingSet();
+            System.out.println(s1);
+
+            return s;
+        }
+
+        int n1 = 0, n2 = 0;
+        if (number >= 10) {
+
+            n1 = number / 10;
+            n2 = number % 10;
+            number = n1;
+            if (n1 < 10) {
+                s.add(n1);
+            }
+            if (n2 < 10) {
+                s.add(n2);
+            }
+
+        } else {
+            int temp = n1;
+            n1 = number;
+            number = n1;
+            s.add(n1);
+
+        }
+        return digitsFinder(number, s);
+
+    }
+
+    @SuppressWarnings({ "unchecked", "rawtypes", "resource" })
     public static void main(String[] args) {
 
         // Tower of Hanoi
@@ -196,10 +282,38 @@ public class Recursion_Level1_9Problems {
         System.out.println();
 
         // Print all subsequences
-        String string = "abc";
+        String string = "aabcc";
         System.out.println("Print all subsequences");
         subsequencePrinter(string, 0, "");
         System.out.println();
+
+        // Print all unique subsequences
+        String str = "aaa";
+        System.out.println("Print all unique subsequences");
+        uniqueSubsequencePrinter(str, 0, "", new HashSet<String>());
+        System.out.println();
+
+        // Print all the Keypad combinations
+        Map keymap = new HashMap<Integer, String>();
+        keymap.put(0, ".");
+        keymap.put(1, "abc");
+        keymap.put(2, "def");
+        keymap.put(3, "ghi");
+        keymap.put(4, "jkl");
+        keymap.put(5, "mno");
+        keymap.put(6, "pqr");
+        keymap.put(7, "stu");
+        keymap.put(8, "vwx");
+        keymap.put(9, "yz");
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter the digit : ");
+        int number = sc.nextInt();
+        System.out.println("Print all the Keypad combinations for the number : " + number);
+        Set digitSet = digitsFinder(number, new TreeSet<>());
+
+        System.out.println(digitSet);
+        Object[] digitarr = digitSet.toArray();
+        keypadCombinations(digitarr, keymap, "", 0);
 
     }
 
