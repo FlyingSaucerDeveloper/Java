@@ -70,34 +70,34 @@ public class Recursion_AdvancedProblems {
 
     public static int guestInviter(int guests) {
 
-        if (guests<=1){
+        if (guests <= 1) {
             return 1;
         }
 
         // if a single guest is called
-        int sWay = guestInviter(guests-1);
+        int sWay = guestInviter(guests - 1);
 
         // if a pair is invited
-        int pWay = (guests-1)*guestInviter(guests-2);
+        int pWay = (guests - 1) * guestInviter(guests - 2);
 
-        return sWay+pWay;
-        
+        return sWay + pWay;
+
     }
 
-    //Similar to code for permutations of a string "abc" 
-    public static void subsetPrinter(int arr[], String ns, int i){
-        
-        if (i==arr.length){
+    // Similar to code for permutations of a string "abc"
+    public static void subsetPrinter(int arr[], String ns, int i) {
+
+        if (i == arr.length) {
             System.out.println(ns);
             return;
         }
-        
-        //if digit wants to come
+
+        // if digit wants to come
         int currn = arr[i];
-        subsetPrinter (arr, ns+currn, i+1);
-        
-        //if not
-        subsetPrinter (arr, ns,i+1);
+        subsetPrinter(arr, ns + currn, i + 1);
+
+        // if not
+        subsetPrinter(arr, ns, i + 1);
     }
 
     public static void main(String[] args) {
@@ -123,21 +123,24 @@ public class Recursion_AdvancedProblems {
         // Place the tiles of 1 X m in a floor of size n X m
         n = 4;
         m = 2;
-        System.out.println("Total ways to place the tiles of size 1 x "+n+" for the floor size of "+n+" x "+m+" are : " + tilePlacer(n, m));
+        System.out.println("Total ways to place the tiles of size 1 x " + n + " for the floor size of " + n + " x " + m
+                + " are : " + tilePlacer(n, m));
         System.out.println();
 
-        //Find the number of ways in which you can invite n people to you partym single or in pairs.
+        // Find the number of ways in which you can invite n people to you partym single
+        // or in pairs.
         int totalGuests = 4;
-        System.out.println("Number of ways to invite "+totalGuests+" are : "+ guestInviter(totalGuests));
+        System.out.println("Number of ways to invite " + totalGuests + " are : " + guestInviter(totalGuests));
         System.out.println();
 
-        //Print all the subsets of n natural numbers
-        System.out.println("All the subsets on first "+n+" natural numbers : ");
-        int n =3;
-        int arr[] = new int [n];
-        for (int i =1; i< (n+1) ;i++){
-            arr[i-1] = i;
-            
+        // Print all the subsets of n natural numbers
+
+        n = 3;
+        System.out.println("All the subsets on first " + n + " natural numbers : ");
+        int arr[] = new int[n];
+        for (int i = 1; i < (n + 1); i++) {
+            arr[i - 1] = i;
+
         }
         subsetPrinter(arr, "", 0);
         System.out.println();
