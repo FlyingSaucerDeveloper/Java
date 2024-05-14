@@ -84,6 +84,22 @@ public class Recursion_AdvancedProblems {
         
     }
 
+    //Similar to code for permutations of a string "abc" 
+    public static void subsetPrinter(int arr[], String ns, int i){
+        
+        if (i==arr.length){
+            System.out.println(ns);
+            return;
+        }
+        
+        //if digit wants to come
+        int currn = arr[i];
+        subsetPrinter (arr, ns+currn, i+1);
+        
+        //if not
+        subsetPrinter (arr, ns,i+1);
+    }
+
     public static void main(String[] args) {
 
         // All permutations of a string - Real life Probles : Seating the students on a
@@ -113,6 +129,17 @@ public class Recursion_AdvancedProblems {
         //Find the number of ways in which you can invite n people to you partym single or in pairs.
         int totalGuests = 4;
         System.out.println("Number of ways to invite "+totalGuests+" are : "+ guestInviter(totalGuests));
+        System.out.println();
+
+        //Print all the subsets of n natural numbers
+        System.out.println("All the subsets on first "+n+" natural numbers : ");
+        int n =3;
+        int arr[] = new int [n];
+        for (int i =1; i< (n+1) ;i++){
+            arr[i-1] = i;
+            
+        }
+        subsetPrinter(arr, "", 0);
         System.out.println();
 
     }
