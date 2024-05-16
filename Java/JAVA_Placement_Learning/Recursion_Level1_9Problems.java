@@ -282,13 +282,13 @@ public class Recursion_Level1_9Problems {
         System.out.println();
 
         // Print all subsequences
-        String string = "aabcc";
+        String string = "aabccc";
         System.out.println("Print all subsequences");
         subsequencePrinter(string, 0, "");
         System.out.println();
 
         // Print all unique subsequences
-        String str = "aaa";
+        String str = "aabccc";
         System.out.println("Print all unique subsequences");
         uniqueSubsequencePrinter(str, 0, "", new HashSet<String>());
         System.out.println();

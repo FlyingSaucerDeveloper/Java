@@ -84,7 +84,7 @@ public class Recursion_AdvancedProblems {
 
     }
 
-    // Similar to code for permutations of a string "abc"
+    // Similar to code for print all the unique subsequence of a string "abc"
     public static void subsetPrinter(int arr[], String ns, int i) {
 
         if (i == arr.length) {
@@ -104,7 +104,7 @@ public class Recursion_AdvancedProblems {
 
         // All permutations of a string - Real life Probles : Seating the students on a
         // chairs
-        // Time Complexity - O(n!)
+        // Time Complexity - O(n*n!)
         String s = "abc";
         System.out.println("Print all possible combinations of letters in a string : " + s);
         permutationsPrinter(s, "");
