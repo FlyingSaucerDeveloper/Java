@@ -130,7 +130,7 @@ public class IBM_Convert_To_Roman {
         else if (number > 500 && number != 900) {
             String temp = "";
 
-            for (int i = 0; i < (((number - 500) / 100) - 5); i++) {
+            for (int i = 0; i < (((number - 500) / 100)); i++) {
                 temp = temp + "C";
             }
             resp = "D" + temp;
@@ -142,11 +142,25 @@ public class IBM_Convert_To_Roman {
 
     }
 
+    public String thousandsGenerator(int number){
+        String resp = "";
+
+        if (number==1000) resp = "M";
+        else if (number > 1000 && number<5000){
+            for (int i = 0; i<(number/1000); i++){
+                resp = resp+"M";
+            }
+
+        }
+
+        return resp;
+    }
+
     public String romanGenerator(Integer number) {
 
         String romanString = "";
 
-        if (number >= 100) {
+        if (number >= 100 && number<1000) {
             romanString = hundredsRomanGenerator(number);
         }
 
@@ -156,6 +170,9 @@ public class IBM_Convert_To_Roman {
 
         if (number <= 10) {
             romanString = unitsRomanGenerator(number);
+        }
+        if (number>=1000){
+            romanString = thousandsGenerator(number);
         }
 
         return romanString;
@@ -178,7 +195,7 @@ public class IBM_Convert_To_Roman {
 
         String temp = number;
 
-        if (Integer.parseInt(number)>=1000){
+        if (Integer.parseInt(number)>=4000){
             throw new numberNotEligibleException(number);
         }
 
@@ -214,11 +231,12 @@ public class IBM_Convert_To_Roman {
 
     }
 
+    @SuppressWarnings("unused")
     public static void main(String[] args) throws numberNotEligibleException {
 
         numberNotEligibleException notEligibleException = new numberNotEligibleException();
 
-        int testArr[] = { 149, 556, 900, 73, 15 };
+        int testArr[] = { 3749, 149, 2255 };
 
         System.out.print("Given Numbers: ");
 
