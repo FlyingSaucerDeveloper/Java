@@ -2,6 +2,7 @@ package Java_Self_Learning;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 /*
  * The table below contains some reference values for converting between integers (i.e., Arabic numerals) and Roman numerals:
@@ -37,122 +38,124 @@ Each of the next n lines contains an integer numbers[i].
  * 
 */
 
+
 @SuppressWarnings("unchecked")
 public class IBM_Convert_To_Roman {
 
+    public String unitsRomanGenerator(int number) {
+        String resp = "";
+
+        switch (number) {
+            case 1:
+                resp = "I";
+                break;
+            case 2:
+                resp = "II";
+                break;
+            case 3:
+                resp = "III";
+                break;
+
+            case 4:
+                resp = "IV";
+                break;
+
+            case 5:
+                resp = "V";
+                break;
+            case 6:
+                resp = "VI";
+                break;
+            case 7:
+                resp = "VII";
+                break;
+            case 8:
+                resp = "VIII";
+                break;
+
+            case 9:
+                resp = "IX";
+                break;
+            case 10:
+                resp = "X";
+                break;
+        }
+
+        return resp;
+
+    }
+
+    public String tensRomanGenerator(int number) {
+        String resp = "";
+
+        if (number < 40) {
+            for (int i = 0; i < (number / 10); i++) {
+                resp = resp + "X";
+            }
+        } else if (number == 40)
+            resp = "XL";
+        else if (number == 50)
+            resp = "L";
+        else if (number > 50 && number != 90) {
+            String temp = "";
+            for (int i = 0; i < ((number - 50) / 10); i++) {
+                temp = temp + "X";
+            }
+            resp = "L" + temp;
+        } else if (number == 90) {
+            resp = "XC";
+        }
+
+        return resp;
+    }
+
+    public String hundredsRomanGenerator(int number) {
+
+        String resp = "";
+
+        if (number == 100) {
+            resp = "C";
+        }
+
+        else if (number < 400) {
+
+            for (int i = 0; i < (number / 100); i++) {
+                resp = resp + 'C';
+            }
+
+        } else if (number == 400)
+            resp = "CD";
+        else if (number == 500)
+            resp = "D";
+        else if (number > 500 && number != 900) {
+            String temp = "";
+
+            for (int i = 0; i < (((number - 500) / 100) - 5); i++) {
+                temp = temp + "C";
+            }
+            resp = "D" + temp;
+        } else if (number == 900) {
+            resp = "CM";
+        }
+
+        return resp;
+
+    }
+
     public String romanGenerator(Integer number) {
+
         String romanString = "";
 
-        System.out.println("Current string : " + romanString);
-//*****************Resolve the issue with number ending with 9.
-        if (number < 100) {
-            if (number < 50) {
+        if (number >= 100) {
+            romanString = hundredsRomanGenerator(number);
+        }
 
-                
+        if (number > 10 && number < 100) {
+            romanString = tensRomanGenerator(number);
+        }
 
-                int temptens = 10 * (number / 10); // Quotient
-                int tempunits = number % 10; // Remainder
-
-                System.out.println("Tens digit " + temptens);
-                System.out.println("Unit digit " + tempunits);
-
-                switch (tempunits) {
-                    case 0:
-                        romanString = "";
-                        System.out.println("Test String for  0 units : " + romanString);
-                        break;
-                    case 1:
-                        romanString = "I";
-                        break;
-                    case 2:
-                        romanString = "II";
-                        break;
-                    case 3:
-                        romanString = "III";
-                        break;
-                    case 4:
-                        romanString = "IV";
-                        break;
-                    case 5:
-                        romanString = "V";
-                        break;
-                    case 6:
-                        romanString = "VI";
-                        break;
-                    case 7:
-                        romanString = "VII";
-                        break;
-                    case 8:
-                        romanString = "VIII";
-                        break;
-                    case 9:
-                        romanString = "XI";
-                        break;
-
-                }
-
-                switch (temptens) {
-                    case 10:
-                        romanString = "X" + romanString;
-                        break;
-                    case 20:
-                        romanString = "XX" + romanString;
-                        break;
-                    case 30:
-                        romanString = "XXX" + romanString;
-                        System.out.println("Test String for  30 tens : " + romanString);
-                        break;
-                    case 40:
-                        romanString = "XV" + romanString;
-                        break;
-
-                }
-
-            } else if (number < 10) {
-
-                switch (number) {
-                    case 1:
-                        romanString = "I";break;
-                    case 2:
-                        romanString = "II";break;
-                    case 3:
-                        romanString = "III";break;
-                    case 4:
-                        romanString = "IV";break;
-                    case 5:
-                        romanString = "V";
-                        System.out.println("Test String for  5 units : " + romanString);break;
-                    case 6:
-                        romanString = "VI";break;
-                    case 7:
-                        romanString = "VII";break;
-                    case 8:
-                        romanString = "VIII";break;
-                    case 9:
-                        romanString = "XI";
-                        break;
-                }
-
-            } else if (number > 50 && number < 99) {
-
-            } else if (number == 99) {
-                romanString = "XC";
-            }
-
-        } else if (number == 100) {
-
-        } else if (number > 100 && number < 500) {
-            if (number == 400) {
-                romanString = "CD";
-            }
-
-        } else if (number == 500) {
-            romanString = "D";
-        } else if (number > 500 && number < 1000) {
-            if (number == 900) {
-                romanString = "CM";
-            }
-
+        if (number <= 10) {
+            romanString = unitsRomanGenerator(number);
         }
 
         return romanString;
@@ -164,65 +167,76 @@ public class IBM_Convert_To_Roman {
         String tempRomanString = "";
         for (int i = 0; i < perDigits.size(); i++) {
 
-            
-
-            System.out.println("Sending number : " + (Integer.parseInt(perDigits.get(i).toString())));
-            System.out.println("Actual value of the digit : "
-                    + (Integer.parseInt(perDigits.get(i).toString()) * (Math.pow(10, (Math.abs(i - cnst))))));
-
-
-            tempRomanString = tempRomanString +(romanGenerator(Integer.parseInt(perDigits.get(i).toString())
-            * (int) (Math.pow(10, (Math.abs(i - cnst))))));
-            
-           
+            tempRomanString = tempRomanString + (romanGenerator(Integer.parseInt(perDigits.get(i).toString())
+                    * (int) (Math.pow(10, (Math.abs(i - cnst))))));
 
         }
         romanNumerals.add(tempRomanString);
     }
 
-    public void digitSeparator(int number, List perDigits) {
+    public void digitSeparator(String number, List perDigits) throws numberNotEligibleException {
 
-        String temp = Integer.toString(number);
+        String temp = number;
+
+        if (Integer.parseInt(number)>=1000){
+            throw new numberNotEligibleException(number);
+        }
 
         if (temp.length() - 1 == 0) {
             perDigits.add(temp.charAt(0));
             return;
         }
 
+        
         perDigits.add(temp.charAt(0));
         temp = temp.substring(1);
-        number = Integer.parseInt(temp);
+        number = temp;
         digitSeparator(number, perDigits);
 
     }
 
-    public void romanizer(int[] numbers, List romanNumerals) {
-
+    public String[] romanizer(int[] numbers) throws numberNotEligibleException {
+        ArrayList romanNumerals = new ArrayList<>();
         List perDigits = new ArrayList<>();
+        String[] answer = new String[numbers.length];
 
         for (int i = 0; i < numbers.length; i++) {
             perDigits.clear();
 
-            digitSeparator(numbers[i], perDigits);
+            digitSeparator(Integer.toString(numbers[i]), perDigits);
             helper(perDigits, romanNumerals);
 
         }
 
-        System.out.println("Test Digit : " + perDigits);
+       answer = (String[]) romanNumerals.stream().toArray(String[]::new); // Converting arraylist to String array
 
-        System.out.println("Test Answer : " + romanNumerals);
+        return answer;
 
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws numberNotEligibleException {
 
-        int testArr[] = { 1, 49 , 23};
+        numberNotEligibleException notEligibleException = new numberNotEligibleException();
 
-        List romanNumerals = new ArrayList<>();
+        int testArr[] = { 149, 556, 900, 73, 15 };
 
-        new IBM_Convert_To_Roman().romanizer(testArr, romanNumerals);
+        System.out.print("Given Numbers: ");
 
-        System.out.println(romanNumerals);
+        for (int i : testArr) {
+            System.out.print(i);
+            System.out.print( " ");
+        }
+        System.out.println();
+        String [] answer = new IBM_Convert_To_Roman().romanizer(testArr);
+
+        System.out.println();
+        System.out.print("Converted to Roman Numerals: ");
+        for (String string : answer) {
+        
+            System.out.print(string);
+            System.out.print(" ");    
+        }
+        
 
     }
 
