@@ -1,3 +1,4 @@
+import javax.swing.text.html.parser.Element;
 
 public class LinkedListSingleList {
 
@@ -31,7 +32,7 @@ public class LinkedListSingleList {
     }
 
     // add - Last (add element to last position)
-    public void allLast(String data) {
+    public void addLast(String data) {
         size++;
         Node newNode = new Node(data);
 
@@ -164,6 +165,54 @@ public class LinkedListSingleList {
         printList();
     }
 
+    public void deleteElementOfNPositionFromLast(int elementNumber) {
+
+        if (head == null || head.next == null) {
+            return;
+        }
+
+        int size = 0;
+        Node prev = null;
+        Node curr = head;
+
+        while (curr != null) {
+            size++;
+            curr = curr.next;
+        }
+
+        int count = 0, elementPositionFromStart = 0;
+
+        elementPositionFromStart = (size - elementNumber) + 1;
+
+        if (elementPositionFromStart == 1) {
+            head = head.next;
+            printList();
+        }
+
+        curr = head; // resetting the crr poniter to head, after size finding oprxn above.
+
+        while (curr != null) {
+
+            count++;
+
+            if (count == elementPositionFromStart) {
+
+                if (prev != null){
+                    prev.next = curr.next;
+                    break;// since the element is deleted no further iterantion is required
+                }
+
+            }
+            prev = curr;
+
+            curr = curr.next;
+
+        }
+
+        printList();
+
+    }
+
     public static void main(String[] args) {
 
         LinkedListSingleList list = new LinkedListSingleList();
@@ -180,7 +229,7 @@ public class LinkedListSingleList {
         System.out.println();
 
         System.out.println("Adding elements to the List using Add last");
-        list.allLast("Kartik");
+        list.addLast("Kartik");
         list.getSize();
         list.printList();
         System.out.println();
@@ -201,6 +250,16 @@ public class LinkedListSingleList {
         System.out.println("Deleting the Last element in List");
         list.deleteLast();
         list.getSize();
+        System.out.println();
+
+        // Delete nth element from the last of the list
+        System.out.println("Delete 3rd element from the last of the list ");
+        list.addFirst("B");
+        list.addFirst("A");
+        list.addLast("D");
+        list.printList();
+        list.getSize();
+        list.deleteElementOfNPositionFromLast(3);
 
     }
 
