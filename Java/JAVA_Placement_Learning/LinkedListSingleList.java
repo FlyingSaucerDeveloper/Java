@@ -2,7 +2,7 @@ import javax.swing.text.html.parser.Element;
 
 public class LinkedListSingleList {
 
-    Node head;
+    static Node head;
     Node newHead;
     int size = 0;
 
@@ -171,20 +171,21 @@ public class LinkedListSingleList {
             return;
         }
 
-        int size = 0;
+        // int size = 0;
         Node prev = null;
         Node curr = head;
-
-        while (curr != null) {
-            size++;
-            curr = curr.next;
-        }
-
+        /*
+         * while (curr != null) {
+         * size++;
+         * curr = curr.next;
+         * }
+         */
         int count = 0, elementPositionFromStart = 0;
 
         elementPositionFromStart = (size - elementNumber) + 1;
 
         if (elementPositionFromStart == 1) {
+            size--;
             head = head.next;
             printList();
         }
@@ -197,7 +198,8 @@ public class LinkedListSingleList {
 
             if (count == elementPositionFromStart) {
 
-                if (prev != null){
+                if (prev != null) {
+                    size--;
                     prev.next = curr.next;
                     break;// since the element is deleted no further iterantion is required
                 }
@@ -210,6 +212,116 @@ public class LinkedListSingleList {
         }
 
         printList();
+
+    }
+
+    private void palindromeChecker() {
+
+        StringBuffer testA = new StringBuffer();
+        StringBuffer testB = new StringBuffer();
+
+        Node curr = head;
+
+        while (curr != null) {
+
+            testA.append(curr.data);
+
+            curr = curr.next;
+        }
+        System.out.println("Test A String (original list) : " + testA);
+
+        Node prev = head;
+        curr = head.next;
+
+        while (curr != null) {
+            Node NEXT = curr.next;
+            curr.next = prev;
+
+            prev = curr;
+            curr = NEXT;
+
+        }
+
+        head.next = null;
+        head = prev;
+        curr = head;
+        while (curr != null) {
+
+            testB.append(curr.data);
+
+            curr = curr.next;
+        }
+        System.out.println("Test B String (Reversed list) : " + testB);
+
+        if (testA.toString().equals(testB.toString())) {
+            System.out.println(">>>The list is a Palindrome<<<");
+        } else
+            System.out.println(">>>List is not a Palindrome<<<");
+
+    }
+
+    public Node middleFinder(Node head) {
+        // Finding middel usinh Hare Turtle Approach
+        Node midHead = null;
+        Node Turtle = head, Hare = head;
+        while (Hare.next.next != null) {
+            Turtle = Turtle.next;
+            Hare = Hare.next.next;
+
+            if (Hare.next == null)
+                break;
+
+        }
+
+        midHead = Turtle;
+
+        return midHead;
+
+    }
+
+    public void palindromeCheckerSpaceSaver() {
+
+        // Solution - Reverse half of the list : A -> B -> B <- A
+        //                                                  |
+        //                                                  nULL
+
+        // REVERSING THE Half List
+        // find the mid of the LinkedList and set it as head.
+
+        Node midHead = middleFinder(head);
+
+        Node prev = midHead;
+        Node curr = midHead.next;
+        int midCount = 0;
+
+        while (curr != null) {
+
+            midCount++;
+            Node NEXT = curr.next;
+            curr.next = prev;
+
+            prev = curr;
+            curr = NEXT;
+        }
+        midHead.next = null;
+        midHead = prev;
+
+        curr = head;
+        Node BackCurr = midHead;
+
+        while (curr != null && BackCurr != null) {
+
+            if (curr.data != BackCurr.data) {
+                System.out.println(" in the IF - Curr Value : " + curr.data);
+                System.out.println(" in the IF - BackCurr Value : " + BackCurr.data);
+                System.out.println(">>>Not a Palindrome<<<");
+                return;
+            }
+            curr = curr.next;
+            BackCurr = BackCurr.next;
+
+        }
+        System.out.println(">>>Is a Palindrome<<<");
 
     }
 
@@ -260,6 +372,43 @@ public class LinkedListSingleList {
         list.printList();
         list.getSize();
         list.deleteElementOfNPositionFromLast(3);
+        list.getSize();
+        System.out.println();
+
+        // Emptying the whole List
+        head = null;
+        list.printList();
+        System.out.println();
+
+        // Checking if the List is palindrome
+        System.out.println("Checking if the List is palindrome");
+        list.addLast("A");
+        list.addLast("B");
+        list.addLast("C");
+        list.addLast("D");
+        list.printList();
+        list.palindromeChecker();
+        System.out.println();
+
+        //// Checking if the List is palindrome with O(1) space complexity
+        // Emptying the whole List
+        head = null;
+        list.printList();
+        System.out.println();
+        System.out.println("Checking if the List is palindrome - the Space complextity on O(1)");
+        list.addLast("1");
+        list.addLast("2");
+        list.addLast("2");
+        list.addLast("1");
+        list.addLast("5");
+        list.addLast("6");
+        list.addLast("1");
+        list.addLast("2");
+        list.addLast("2");
+        list.addLast("1");
+        list.printList();
+        list.palindromeCheckerSpaceSaver();
+        System.out.println();
 
     }
 
