@@ -67,18 +67,55 @@ public class BinaryTreeBasicQuestions {
     }
 
     public int DiameterOfTree(Node root) {
-        if (root==null){
+        if (root == null) {
             return 0;
         }
 
         int leftDiameter = DiameterOfTree(root.leftNode);
         int rightDiameter = DiameterOfTree(root.rightNode);
-        int rootDiameter = heightOfTree(root.leftNode)+heightOfTree(root.rightNode)+1;
+        int rootDiameter = heightOfTree(root.leftNode) + heightOfTree(root.rightNode) + 1;
 
         return Math.max(rootDiameter, Math.max(rightDiameter, leftDiameter));
 
     }
 
+    public boolean ifIdentical(Node root, Node testroot) {
+        if (root == null && testroot == null) {
+            return true;
+        }
+
+        if (root == null || testroot == null) {
+            return false;
+        }
+
+        if (root.data == testroot.data)
+            return ifIdentical(root.leftNode, testroot.leftNode) && ifIdentical(root.rightNode, testroot.rightNode);
+
+        else
+            return false;
+
+    }
+
+    public boolean subtreeFinder(Node root, Node testroot) {
+        if (root == null) {
+            return false;
+        }
+
+        if (testroot == null) {
+            return true;
+        }
+
+        if (root.data == testroot.data) {
+
+            if (ifIdentical(root, testroot)) {
+                return true;
+            }
+
+        }
+
+        return subtreeFinder(root.leftNode, testroot) || subtreeFinder(root.rightNode, testroot);
+
+    }
 
     public static void main(String[] args) {
 
@@ -89,10 +126,18 @@ public class BinaryTreeBasicQuestions {
         System.out.println("Total nodes in the Tree : " + new BinaryTreeBasicQuestions().nodeCounter(root));
         System.out.println("Sum of all the nodes : " + new BinaryTreeBasicQuestions().totalSum(root));
         System.out.println("Height of the tree : " + new BinaryTreeBasicQuestions().heightOfTree(root));
-        System.out.println("Diameter of the tree **IMP** FAANG : " + new BinaryTreeBasicQuestions().DiameterOfTree(root)); // Max of Diameter of Left, Right and Root  // Time Complexiti O(n x n)
-       // System.out.println("Diameter of the tree **IMP** FAANG (Not considering root): " + new BinaryTreeBasicQuestions().DiameterOfTree(root));
+
+        System.out
+                .println("Diameter of the tree **IMP** FAANG : " + new BinaryTreeBasicQuestions().DiameterOfTree(root));
+        // Max of Diameter of Left, Right and Root and Time Complexiti O(n x n)
+
+        int[] subNodes = { 2, 4, -1, -1, 5, -1, -1 };
+        i = -1;
+
+        Node subroot = new BinaryTreeBasicQuestions().buildTree(subNodes);
+
+        System.out.println("Subtree of the another tree ***IMP*** FAANG : "
+                + new BinaryTreeBasicQuestions().subtreeFinder(root, subroot));
 
     }
-
-  
 }
