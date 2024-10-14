@@ -87,6 +87,7 @@ public class BinaryTreeBasics {
         LinkedList<Node> lQueue = new LinkedList<Node>();
         lQueue.add(root);
         lQueue.add(null);
+        
 
         while (!lQueue.isEmpty()) {
             Node curr = lQueue.remove();
